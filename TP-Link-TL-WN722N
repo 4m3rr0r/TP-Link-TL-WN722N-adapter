@@ -1,0 +1,56 @@
+!Use these commands to get the adapter working on Kali for packet injection and monitoring:
+!Commands:
+==========
+
+lsusb
+
+apt update && apt upgrade
+
+apt install dkms bc
+
+reboot
+
+uname -r
+
+
+!Try either of these commands to see which works:
+
+apt install linux-headers-$(uname -r)
+sudo apt-get install linux-headers-5.10.0-kali6-amd64
+
+sudo -i
+
+echo "blacklist 8188eu" >> "/etc/modprobe.d/realtek.conf"
+
+echo "blacklist r8188eu" >> "/etc/modprobe.d/realtek.conf"
+
+rmmod r8188eu.ko
+
+cd Desktop
+
+git clone https://github.con/aircrack-ng/rtl8188eus.git
+
+cd rtl8188eus
+
+make
+
+make install
+
+reboot
+
+!To enable Monitor mode and test packet injection:
+!=================================================
+
+sudo ifconfig wlan0 down
+
+!kill processes
+sudo airmon-ng check kill
+
+!Start monitor mode
+sudo airmon-ng start wlan0
+
+sudo ifconfig wlan0 up
+
+!Verify that monitor mode is used
+sudo airmon-ng 
+
